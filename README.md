@@ -6,7 +6,7 @@ sudo apt-get install zip
 sudo curl -s "https://get.sdkman.io" | bash
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 ```
-##компиляция
+## компиляция
 ``` 
 kotlinc q.kt -include-runtime -d q.jar
 java -jar q.jar
