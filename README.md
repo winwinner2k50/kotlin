@@ -11,6 +11,10 @@ source "$HOME/.sdkman/bin/sdkman-init.sh"
 kotlinc q.kt -include-runtime -d q.jar
 java -jar q.jar
 ```
+# k.sh
+
+скрипт для запуска файлов .kt
+
 # Задачи
 
 ## 1
