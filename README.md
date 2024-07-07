@@ -1,4 +1,4 @@
-# kotlin
+# kotlin старт
 ## установка на wsl
 ```bash
 sudo apt --fix-broken install
@@ -11,3 +11,10 @@ source "$HOME/.sdkman/bin/sdkman-init.sh"
 kotlinc q.kt -include-runtime -d q.jar
 java -jar q.jar
 ```
+# Задачи
+
+## 1
+
+упорядочить строки матрицы по сумме чисел в строке
+
+
