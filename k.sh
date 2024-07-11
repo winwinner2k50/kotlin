@@ -1,3 +1,4 @@
+find . -name "*.jar" -delete
 if [ "$1" = "1" ]
 then
     rm temp_for_kotlin.txt

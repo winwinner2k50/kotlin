@@ -79,29 +79,84 @@ class pole(val n: Int, val m: Int)
     fun output()
     {
         println("\u001b[H\u001b[2J")
-        print("\n\n")
+        print("  ")
+        for (i in 0 until m)
+        {
+            print(i+1)
+        }
+        print("\n")
+        for (i in 0 until m + 3)
+        {
+            print("-")
+        }
+        print("\n")
         for (i in 0 until n)
         {
-            print("|")
+            print("${i+1}|")
             for (j in 0 until m)
             {
                 print(a[i][j].color)
             }
             println("|")
         }
-        Thread.sleep(1500)
+        for (i in 0 until m + 3)
+        {
+            print("-")
+        }
+        print("\n")
+        Thread.sleep(1200)
     }
 
-    fun check_all_place()
+    fun check_all_place(): Boolean
     {
+        var ok: Boolean = false
         for (i in 0 until n)
         {
             for (j in 0 until m)
             {
-                if(!check_color(i, j, a[i][j].color))
+                if(a[i][j].color != " " && (!check_color(i, j, a[i][j].color)))
+                {
                     dell_el(i, j)
+                    ok = true
+                }     
             }
         }
+        println("ok4")
+        return ok
+    }
+
+    fun swap_dell():Boolean
+    {
+        var ok: Boolean = false
+        for (i in 0 until n)
+        {
+            for (j in 0 until m)
+            {
+                if (a[i][j].color == " ")
+                {
+                    ok = true
+                    if (i != 0)
+                    {
+                        swap(i, j, i - 1, j)
+                        println("ok")
+                    }     
+                    else
+                    {
+                        val r =  Random().nextInt(4) 
+                        if (r == 0)
+                            a[i][j].color = "@"
+                        if (r == 1)
+                            a[i][j].color= "#"
+                        if (r == 2)
+                            a[i][j].color = "&"
+                        if (r == 3)
+                            a[i][j].color = "$"
+                    }
+                }     
+            }
+        }
+        println("ok3")
+        return ok
     }
 
     fun dell_el(pos_i: Int, pos_j: Int)
@@ -180,11 +235,29 @@ fun main()
     val a = pole(5, 5)
     while (true)
     {
-        val (i1, j1) = readLine()!!.split(" ").map { it.toInt() }
-        val (i2, j2) = readLine()!!.split(" ").map { it.toInt() }
+        var (i1, j1) = readLine()!!.split(" ").map { it.toInt() }
+        var (i2, j2) = readLine()!!.split(" ").map { it.toInt() }
+        i1--;
+        j1--;
+        i2--;
+        j2--;
         a.swap(i1, j1, i2, j2)
         a.output()
-        a.check_all_place()
+        var ok: Boolean = false
+        do
+        {
+            ok = false
+            while(a.swap_dell())
+            {
+                a.output()
+            }
+            while(a.check_all_place())
+            {
+                ok = true
+                a.output()
+            }
+        }while(ok)
+
         a.output()
     }
 }
